@@ -7,36 +7,78 @@ import { useFormData } from '../../Context/Dataprovider';
 import '../../App.css';
 
 
-const BoxStyle=styled(Box)`
-background-color:#fff; 
-width:42vw;
-min-height: 10vh;
-border: 1px solid #dadce0;
-border-radius: 8px;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
-margin-bottom: -8px;
-`
+const BoxStyle=styled(Box)(({theme})=>({
+    backgroundColor:'#fff', 
+    width:'42vw',
+    minHeight:'10vh',
+    border: '1px solid #dadce0',
+    borderRadius: 8,
+    borderTop: 10,
+    marginBottom:-8,
+[theme.breakpoints.down('lg')]:{
+    width:'42vw',
+},
+[theme.breakpoints.down('md')]:{
+    width:'42vw',
+},
+[theme.breakpoints.down('sm')]:{
+    width:'100vw',
+}
+}))
 const TextStyle=styled(Box)`
 padding:0px 10px 10px 15px;
 margin-left: 10px;`
 
-const StyleTypo=styled(Typography)`
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 12pt;
-    line-height: 1.0;
-    letter-spacing: 0;`
-const StyleInput = styled(Input)`
-    width: 20vw;  /* Adjust the height as needed */
-      margin: 10px 0px 20px 0px;  
-    `;
-    const SelectStyle=styled(NativeSelect)`
-    width:10vw;
-    height:7vh;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    `
+// const StyleTypo=styled(Typography)`
+    // font-family: 'Roboto', sans-serif;
+    // font-weight: 400;
+    // font-size: 12pt;
+    // line-height: 1.0;
+    // letter-spacing: 0;`
+const StyleTypo=styled(Typography)(({theme})=>({
+    fontFamily: "'Roboto', sans-serif",
+    fontWeight: 400,
+    fontSize: '12pt',
+    lineHeight: '1.0',
+    letterSpacing: 0,
+    display: 'flex',
+    [theme.breakpoints.down('sm')]:{
+        flexDirection: 'row',
+    }
+}))
+
+
+const StyleInput=styled(Input)(({theme})=>({
+    width: '20vw',
+    margin: '10px 0px 15px 0px',
+    [theme.breakpoints.down('lg')]:{
+        width:'20vw',
+    },
+    [theme.breakpoints.down('md')]:{
+        width:'30vw',
+    },
+    [theme.breakpoints.down('sm')]:{
+        width:'50vw',
+    }
+}))
+
+
+    // const SelectStyle=styled(NativeSelect)`
+    // width:10vw;
+    // height:7vh;
+    // margin-bottom: 30px;
+    // margin-top: 30px;
+    // `
+
+const SelectStyle=styled(NativeSelect)(({theme})=>({
+    minWidth:'15vw',
+    height:'7vh',
+    marginBottom: '30px',
+    marginTop: '30px',
+    [theme.breakpoints.down('sm')]:{
+        minwidth:'15vw',
+    }
+}))
 const Star=styled(Typography)`
 color:red;
 padding-left: 2px;
@@ -53,7 +95,21 @@ const Question=({data})=>{
             e.preventDefault();
           }
         else{
-            updateForm(fieldName, fieldValue);
+            if(fieldName==='English Scores - Listening'||fieldName==='English Scores - Reading'||fieldName==='English Scores - Speaking'||fieldName==='English Scores - Writing')
+            {
+                if(fieldValue>0&&fieldValue<10)
+                {
+                    updateForm(fieldName, fieldValue);
+                }
+                else
+                {
+                    alert('This Value must be grater than 0 and less than 10');
+                    e.preventDefault();
+                }
+                    
+            }
+            else
+                updateForm(fieldName, fieldValue);
         } 
     };
 
@@ -65,13 +121,12 @@ const Question=({data})=>{
                     {
                         (id===4)?
                         <TextStyle  key={id}>
-                            <StyleTypo  style={{ margin: '20px 0 14px 0px',display:'flex'}}>{Ques}<Star>*</Star></StyleTypo > 
-
+                            <StyleTypo  style={{ margin: '20px 0 0 0'}}>{Ques}<Star>*</Star></StyleTypo > 
                             <SelectStyle
                                 variant="standard"
                                 value={Form[Ques]}
                                 placeholder='Choose'
-                                sx={{ minWidth: 200 }}
+                                
                                 onChange={handleData} name={Ques}> 
                                  <option value=""></option>            
                                     <option value="Grade12">Grade 12</option>
