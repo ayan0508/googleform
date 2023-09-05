@@ -13,7 +13,6 @@ app.use(express.json());
 
 app.post('/chat',async (req, res) => {
     try {
-
         const {'Full Name':user}=req.body.params;
         const email=req.body.params.Email;
         const age=req.body.params.Age;
