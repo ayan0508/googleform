@@ -1,6 +1,7 @@
 
 import axios from 'axios';
-const URL='https://gform-2vmh.onrender.com';
+//const URL='https://gform-2vmh.onrender.com';
+const URL='http://localhost:8000';
 export const ACart=async(data)=>{
     try{
        // console.log(data);
