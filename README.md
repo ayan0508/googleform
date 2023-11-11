@@ -1,4 +1,7 @@
 # googleform with OpenAi integration 
+Link : https://tubular-dusk-237d25.netlify.app/
+
+
 I am trying to make a Google form clone with Openai integration after filling in all the values and hitting the submit button 
 and it will send which data you filled in the email to you.
 ![image](https://github.com/ayan0508/googleform/assets/64884225/c6da96a7-703d-4286-84b9-89ca1491e32e)
